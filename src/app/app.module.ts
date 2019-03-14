@@ -21,12 +21,14 @@ import { RegisterComponent } from './login/register.component';
 
 // Servicios agrupados
 import { ServiceModule } from './services/service.module';
+import { RxjsComponent } from './pages/rxjs/rxjs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    RxjsComponent
     // ,    IncrementadorComponent
   ],
   imports: [
