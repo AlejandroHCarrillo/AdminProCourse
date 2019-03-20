@@ -1,14 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 
 // Rutas
 import { APP_ROUTES } from './app.routes';
 
-// Modules
+// Modulos
 import { PagesModule } from './pages/pages.module';
 
-// Temporal
+// temporal
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+// Servicios
+import { ServiceModule } from './services/service.module';
+
+
 
 
 // Componentes
@@ -16,20 +21,13 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 
-// import { IncrementadorComponent } from './components/incrementador/incrementador.component';
-// import { SettingsService } from './services/service.index';
 
-// Servicios agrupados
-import { ServiceModule } from './services/service.module';
-import { RxjsComponent } from './pages/rxjs/rxjs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
-    RxjsComponent
-    // ,    IncrementadorComponent
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +37,7 @@ import { RxjsComponent } from './pages/rxjs/rxjs.component';
     ReactiveFormsModule,
     ServiceModule
   ],
-  providers: [ ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

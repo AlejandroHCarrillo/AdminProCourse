@@ -1,25 +1,36 @@
-import { CommonModule } from "@angular/common";
-import { BreadcrumbsComponent } from "./breadcrumbs/breadcrumbs.component";
-import { HeaderComponent } from "./header/header.component";
-import { NgModule } from "@angular/core";
-import { SidebarComponent } from "./sidebar/sidebar.component";
-import { NopagefoundComponent } from "./nopagefound/nopagefound.component";
-import { RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { RouterModule } from '@angular/router';
+
+// Pipes
+import { PipesModule } from '../pipes/pipes.module';
+
+import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+
 
 @NgModule({
-  imports: [ CommonModule, 
-    RouterModule],
-  declarations: [
-    NopagefoundComponent,
-    HeaderComponent,
-    BreadcrumbsComponent,
-    SidebarComponent
-  ],
-  exports: [
-    NopagefoundComponent,
-    HeaderComponent,
-    BreadcrumbsComponent,
-    SidebarComponent
-  ]
+    imports: [
+        RouterModule,
+        CommonModule,
+        PipesModule
+    ],
+    declarations: [
+        NopagefoundComponent,
+        HeaderComponent,
+        SidebarComponent,
+        BreadcrumbsComponent,
+        NopagefoundComponent
+    ],
+    exports: [
+        NopagefoundComponent,
+        HeaderComponent,
+        SidebarComponent,
+        BreadcrumbsComponent,
+        NopagefoundComponent
+    ]
 })
-export class SharedModule {}
+export class SharedModule { }
