@@ -1,3 +1,4 @@
+import { ProfileComponent } from './profile/profile.component';
 import { LoginGuardGuard } from './../services/guards/login-guard.guard';
 import { Routes, RouterModule } from "@angular/router";
 import { PagesComponent } from "./pages.component";
@@ -18,6 +19,7 @@ const pageRoutes: Routes = [
       { path: "graficas1", component: Graficas1Component },
       { path: "rxjs", component: RxjsComponent},
       { path: "account-settings", component: AccountSettingsComponent },
+      { path: "profile", component: ProfileComponent },
       { path: "", redirectTo: "/dashboard", pathMatch: "full" }
     ]
   }

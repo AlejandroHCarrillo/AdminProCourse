@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PAGES_ROUTES } from './pages.routes';
 import { SharedModule } from './../shared/shared.module';
+import { CommonModule } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
 
@@ -16,6 +17,10 @@ import { IncrementadorComponent } from '../components/incrementador/incrementado
 //TODO: graficos component
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
+//  Pipes Module
+import { PipesModule } from './../pipes/pipes.module';
+import { ProfileComponent } from './profile/profile.component';
+
 @NgModule({
     declarations:[
         PagesComponent,
@@ -23,7 +28,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
         ProgressComponent,
         Graficas1Component,
         IncrementadorComponent,
-        AccountSettingsComponent
+        AccountSettingsComponent,
+        ProfileComponent
     ],
     exports:[
         DashboardComponent,
@@ -33,7 +39,9 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     imports:[
         SharedModule,
         PAGES_ROUTES,
-        FormsModule
+        FormsModule,
+        PipesModule,
+        CommonModule
     ]
 })
 export class PagesModule{};

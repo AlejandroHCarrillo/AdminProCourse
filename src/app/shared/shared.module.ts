@@ -6,9 +6,14 @@ import { SidebarComponent } from "./sidebar/sidebar.component";
 import { NopagefoundComponent } from "./nopagefound/nopagefound.component";
 import { RouterModule } from "@angular/router";
 
+//  Pipes Module
+import { PipesModule } from './../pipes/pipes.module';
+
 @NgModule({
   imports: [ CommonModule, 
-    RouterModule],
+             RouterModule,
+             PipesModule
+            ],
   declarations: [
     NopagefoundComponent,
     HeaderComponent,
