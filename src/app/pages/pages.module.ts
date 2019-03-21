@@ -22,10 +22,14 @@ import { PipesModule } from '../pipes/pipes.module';
 
 import { IncrementadorComponent } from '../components/incrementador/incrementador.component';
 import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.component';
-import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { HotelesComponent } from './hoteles/hoteles.component';
+import { MedicosComponent } from './medicos/medicos.component';
+import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 
 @NgModule({
     declarations: [
@@ -35,10 +39,14 @@ import { ProfileComponent } from './profile/profile.component';
         Graficas1Component,
         IncrementadorComponent,
         GraficoDonaComponent,
-        AccoutSettingsComponent,
+        AccountSettingsComponent,
         PromesasComponent,
         RxjsComponent,
-        ProfileComponent
+        ProfileComponent,
+        UsuariosComponent,
+        HotelesComponent,
+        MedicosComponent,
+        ModalUploadComponent
     ],
     exports: [
         DashboardComponent,
