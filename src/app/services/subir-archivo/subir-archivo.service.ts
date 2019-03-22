@@ -21,26 +21,21 @@ export class SubirArchivoService {
         if ( xhr.readyState === 4 ) {
 
           if ( xhr.status === 200 ) {
-            console.log( 'Imagen subida' );
+            // console.log( 'Imagen subida' );
             resolve( JSON.parse( xhr.response ) );
           } else {
-            console.log( 'Fallo la subida' );
+            console.log( 'Fallo la subida del archivo' );
             reject( xhr.response );
           }
 
         }
       };
-
+      //  TODO: Verificar que el directorio de guardado de imagenes existe
       let url = URL_SERVICIOS + '/upload/' + tipo + '/' + id;
 
       xhr.open('PUT', url, true );
       xhr.send( formData );
 
     });
-
-
-
-
   }
-
 }

@@ -2,13 +2,14 @@ import { ModalUploadService } from './../../components/modal-upload/modal-upload
 import { UsuarioService } from "src/app/services/service.index";
 import { Component, OnInit } from "@angular/core";
 import { Usuario } from "src/app/models/usuario.model";
-import * as swal from 'sweetalert';
+// import * as swal from 'sweetalert';
+import * from 'sweetalert';
 
-// declare var swal:any;
+declare var swal:any;
 @Component({
   selector: "app-usuarios",
   templateUrl: "./usuarios.component.html",
-  styleUrls: ["./usuarios.component.css"]
+  styleUrls: []
 })
 export class UsuariosComponent implements OnInit {
   usuarios: Usuario[] = [];
@@ -94,7 +95,7 @@ export class UsuariosComponent implements OnInit {
       icon: 'warning',
       buttons: true,
       dangerMode: true,
-    })
+    })!
     .then((borrar) => {
       // console.log(borrar);
       

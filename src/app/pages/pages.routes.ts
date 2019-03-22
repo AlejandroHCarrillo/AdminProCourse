@@ -1,3 +1,4 @@
+import { HospitalesComponent } from './hospitales/hospitales.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -30,7 +31,7 @@ const pagesRoutes: Routes = [
             { path: 'perfil', component: ProfileComponent, data: { titulo: 'Perfil de usuario' } },
             //  Mantenimiento
             { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento de Usuarios' } },
-            { path: 'hoteles', component: UsuariosComponent, data: { titulo: 'Mantenimiento de Hoteles' } },
+            { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Mantenimiento de Hospitales' } },
             { path: 'medicos', component: UsuariosComponent, data: { titulo: 'Mantenimiento de Medicos' } },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
         ]
