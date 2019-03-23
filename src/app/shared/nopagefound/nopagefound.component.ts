@@ -5,9 +5,10 @@ declare function init_plugins();
 @Component({
   selector: 'app-nopagefound',
   templateUrl: './nopagefound.component.html',
-  styles: []
+  styleUrls: [ './error-pages.css' ]
 })
 export class NopagefoundComponent implements OnInit {
+  anio: number = new Date().getFullYear();
 
   constructor() { }
 
