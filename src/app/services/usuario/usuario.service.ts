@@ -3,9 +3,15 @@ import { Usuario } from "../../models/usuario.model";
 import { HttpClient } from "@angular/common/http";
 import { URL_SERVICIOS } from "../../config/config";
 
+
+// import { Observable } from 'rxjs/Rx';
+// import { Observable } from 'rxjs/Observable';
 import "rxjs/add/operator/map";
+import "rxjs/add/operator/catch";
+
 import { Router } from "@angular/router";
 import { SubirArchivoService } from "../subir-archivo/subir-archivo.service";
+import { throwError } from "rxjs";
 
 @Injectable()
 export class UsuarioService {
@@ -22,6 +28,9 @@ export class UsuarioService {
   }
 
   estaLogueado() {
+    if (this.token === null || this.token === undefined ){
+      return false;
+    }
     return this.token.length > 5 ? true : false;
   }
 
@@ -78,20 +87,35 @@ export class UsuarioService {
     }
 
     let url = URL_SERVICIOS + "/login";
-    return this.http.post(url, usuario).map((resp: any) => {
-      console.log(resp);
-      
-      this.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu);
-      return true;
-    });
+    return this.http.post(url, usuario)
+          .map((resp: any) => {
+            console.log(resp);
+            if(resp.ok){
+              this.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu);            
+              return true;
+            } else{
+              swal('Error en el login', resp.mensaje, 'error');  
+            }
+          })
+          .catch( err => {
+            console.log(err.status );
+            console.log(err.error.mensaje );
+
+            swal('Error en el login', err.error.mensaje, 'error');
+            return throwError(err);
+          });
   }
 
   crearUsuario(usuario: Usuario) {
     let url = URL_SERVICIOS + "/usuario";
 
-    return this.http.post(url, usuario).map((resp: any) => {
+    return this.http.post(url, usuario)
+      .map((resp: any) => {
       swal("Usuario creado", usuario.email, "success");
       return resp.usuario;
+    }).catch( err => {
+      swal(err.error.mensaje, err.error.errors.message, 'error');      
+      return throwError(err);
     });
   }
 
@@ -111,6 +135,9 @@ export class UsuarioService {
         swal("Usuario actualizado", usuario.nombre, "success");
 
         return true;
+    }).catch( err => {
+      swal(err.error.mensaje, err.error.errors.message, 'error');      
+      return throwError(err);
     });
   }
 
