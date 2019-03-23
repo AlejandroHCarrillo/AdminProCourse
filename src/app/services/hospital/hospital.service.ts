@@ -4,10 +4,10 @@ import { HttpClient } from "@angular/common/http";
 import { Hospital } from "./../../models/hospital.model";
 import { Injectable } from "@angular/core";
 import { SubirArchivoService } from "../subir-archivo/subir-archivo.service";
-import * as swal from "sweetalert";
+// import * as swal from "sweetalert";
 
-// import * from 'sweetalert';
-// declare var swal:any;
+import * from 'sweetalert';
+declare var swal:any;
 @Injectable()
 export class HospitalService {
   hospital: Hospital;
@@ -36,9 +36,7 @@ export class HospitalService {
 
   obtenerHospital(id: string) {
     let url = URL_SERVICIOS + "/hospital/" + id;
-
-    return this.http.post(url, hospital).map((resp: any) => {
-      swal("Hospital creado", hospital.nombre, "success");
+    return this.http.get(url).map((resp: any) => {
       return resp.hospital;
     });
   }
