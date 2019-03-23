@@ -1,5 +1,4 @@
 import { ModalUploadService } from "./../../components/modal-upload/modal-upload.service";
-import { Hospital } from "src/app/models/hospital.model";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Medico } from "src/app/models/medico.model";
 import {
@@ -44,7 +43,7 @@ export class MedicoComponent implements OnInit {
   ngOnInit() {
     this._hospitalService
       .cargarHospitales()
-      .subscribe(resp => (this.hospitales = resp.hospitales));
+      .subscribe((resp:any) => (this.hospitales = resp.hospitales));
   }
 
   cargarMedico(id: string) {
