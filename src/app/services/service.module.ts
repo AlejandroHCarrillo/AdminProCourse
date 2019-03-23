@@ -4,13 +4,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
+  LoginGuardGuard,
+  AdminGuard,
   SettingsService,
   SidebarService,
   SharedService,
   UsuarioService,
   HospitalService,
   MedicoService,
-  LoginGuardGuard,
   SubirArchivoService
  } from './service.index';
 
@@ -20,13 +21,14 @@ import {
     HttpClientModule
   ],
   providers: [
+    LoginGuardGuard,
+    AdminGuard,
     SettingsService,
     SidebarService,
     SharedService,
     UsuarioService,
     HospitalService,
     MedicoService,
-    LoginGuardGuard,
     SubirArchivoService,
     ModalUploadService
   ],

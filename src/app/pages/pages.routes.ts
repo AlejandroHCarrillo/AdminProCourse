@@ -1,3 +1,6 @@
+import { LoginGuardGuard } from '../services/service.index';
+import { AdminGuard } from './../services/guards/admin.guard';
+
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -18,7 +21,6 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
 
 
-import { LoginGuardGuard } from '../services/service.index';
 
 
 const pagesRoutes: Routes = [
@@ -36,7 +38,12 @@ const pagesRoutes: Routes = [
             { path: 'perfil', component: ProfileComponent, data: { titulo: 'Perfil de usuario' } },
             { path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo: 'Buscador' } },
             //  Mantenimiento
-            { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento de Usuarios' } },
+            {   path: 'usuarios', 
+                component: UsuariosComponent, 
+                canActivate: [ AdminGuard ],
+                data: { titulo: 'Mantenimiento de Usuarios' },
+
+            },
             { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Mantenimiento de Hospitales' } },
             { path: 'medicos', component: MedicosComponent, data: { titulo: 'Mantenimiento de Medicos' } },
             { path: 'medico/:id', component: MedicoComponent, data: { titulo: 'Actualizar Medico' } },

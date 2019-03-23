@@ -4,10 +4,10 @@ import { HttpClient } from "@angular/common/http";
 import { Hospital } from "./../../models/hospital.model";
 import { Injectable } from "@angular/core";
 import { SubirArchivoService } from "../subir-archivo/subir-archivo.service";
-// import * as swal from "sweetalert";
+import * as swal from "sweetalert";
 
-import * from 'sweetalert';
-declare var swal:any;
+// import * from 'sweetalert';
+// declare var swal:any;
 @Injectable()
 export class HospitalService {
   hospital: Hospital;
