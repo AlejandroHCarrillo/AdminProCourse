@@ -1,3 +1,4 @@
+import { BusquedaComponent } from './busqueda/busqueda.component';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HospitalesComponent } from './hospitales/hospitales.component';
@@ -33,6 +34,7 @@ const pagesRoutes: Routes = [
             { path: 'rxjs', component: RxjsComponent, data: { titulo: 'RxJs' } },
             { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes de Tema' } },
             { path: 'perfil', component: ProfileComponent, data: { titulo: 'Perfil de usuario' } },
+            { path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo: 'Buscador' } },
             //  Mantenimiento
             { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento de Usuarios' } },
             { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Mantenimiento de Hospitales' } },
