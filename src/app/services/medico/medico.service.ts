@@ -4,10 +4,8 @@ import { HttpClient } from "@angular/common/http";
 import { Medico } from "./../../models/medico.model";
 import { Injectable } from "@angular/core";
 import { SubirArchivoService } from "../subir-archivo/subir-archivo.service";
-// import * as swal from "sweetalert";
+import Swal from 'sweetalert2'
 
-// import * from 'sweetalert';
-// declare var swal:any;
 @Injectable()
 export class MedicoService {
   medico: Medico;
@@ -51,7 +49,7 @@ export class MedicoService {
     let url = URL_SERVICIOS + "/medico?token=" + this.token ;
 
     return this.http.post(url, medico ).map((resp: any) => {
-      swal("Medico creado", resp.medico.nombre, "success");
+      Swal.fire("Medico creado", resp.medico.nombre, "success");
       return resp.medico;
     });
   }
@@ -61,7 +59,7 @@ export class MedicoService {
     url += "?token=" + this.token;
 
     return this.http.put(url, medico).map((resp: any) => {
-      swal("Medico actualizado", medico.nombre, "success");
+      Swal.fire("Medico actualizado", medico.nombre, "success");
       return true;
     });
   }
@@ -70,7 +68,7 @@ export class MedicoService {
     let url = URL_SERVICIOS + "/medico/" + id;
     url += "?token=" + this.token;
     return this.http.delete(url).map(resp => {
-      swal(
+      Swal.fire(
         "El medico ha sido eliminado",
         "El medico ha sido eliminado correctamente",
         "success"

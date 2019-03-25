@@ -2,9 +2,8 @@ import { ModalUploadService } from "./../../components/modal-upload/modal-upload
 import { HospitalService } from "src/app/services/service.index";
 import { Component, OnInit } from "@angular/core";
 import { Hospital } from "src/app/models/hospital.model";
-import * as swal from "sweetalert";
-// import * from 'sweetalert';
-// declare var swal:any;
+import Swal from 'sweetalert2'
+
 @Component({
   selector: "app-hospitales",
   templateUrl: "./hospitales.component.html",
@@ -79,37 +78,52 @@ export class HospitalesComponent implements OnInit {
 
   borrarHospital(id: string) {
     // console.log(id);
-    swal({
+    // confirm()
+
+    Swal.fire({
       title: "¿Estas seguro de eliminar a este hospital?",
       text: "Una vez eliminado no es posible recuperar al hospital",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true
-    })!.then(borrar => {
-      // console.log(borrar);
-      if (borrar) {
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminarlo'
+    })
+    .then((willDelete) => {
+      // console.log(willDelete);      
+      if (willDelete.value) {
+        // console.log('Ya lo borro');        
         this._hospitalService.borrarHospital(id).subscribe(resp => {
-          // console.log(resp);
           this.cargarHospitales();
         });
       } else {
-        swal(
-          "El hospital no fue eliminado",
-          "El hospital no ha sido eliminado"
-        );
-        // alert("El hospital no fue eliminado");
+        // console.log('NO BORRADO');
+        Swal.fire( "El hospital no fue eliminado", "El hospital no ha sido eliminado" );
       }
     });
+
   }
 
-  crearHospital(nombre: string) {
-    swal( "Nombre del hospital:", { 
-      content: 'input' })!
-      .then(value => {
-      // swal(`You typed: ${value}`);
-      this._hospitalService.crearHospital(value).subscribe(resp => {
-        console.log(resp);
-      });
+  crearHospital() {
+
+    Swal.fire({
+      title: 'Alta de nuevo hospital',
+      text: 'Por favor escriba el nombre del hospital:',
+      input: 'text',
+      // inputValue: inputValue,
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) {
+          return 'Por favor escriba el nombre del hospital'
+        }
+      }
+    }).then( (value) => {
+      console.log(value);
+      this._hospitalService.crearHospital(value.value)
+                           .subscribe(resp => { 
+                             console.log(resp);
+                             Swal.fire('Se ha creado el hospital:', resp.nombre, 'success' );
+                            });
     });
   }
 

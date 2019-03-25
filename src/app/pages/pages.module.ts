@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 // ng2-charts
 import { ChartsModule } from 'ng2-charts';
 
-import { PagesComponent } from './pages.component';
+// import { PagesComponent } from './pages.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -30,12 +30,12 @@ import { HospitalesComponent } from './hospitales/hospitales.component';
 import { MedicosComponent } from './medicos/medicos.component';
 import { MedicoComponent } from './medicos/medico.component';
 
-import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
+// import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 
 @NgModule({
     declarations: [
-        PagesComponent,
+        // PagesComponent,
         DashboardComponent,
         ProgressComponent,
         Graficas1Component,
@@ -49,7 +49,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
         HospitalesComponent,
         MedicosComponent,
         MedicoComponent,
-        ModalUploadComponent,
+        // ModalUploadComponent,
         BusquedaComponent
     ],
     exports: [

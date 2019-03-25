@@ -5,13 +5,15 @@ import { URL_SERVICIOS } from "../../config/config";
 
 
 // import { Observable } from 'rxjs/Rx';
-// import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 
 import { Router } from "@angular/router";
 import { SubirArchivoService } from "../subir-archivo/subir-archivo.service";
 import { throwError } from "rxjs";
+
+import Swal from 'sweetalert2'
 
 @Injectable()
 export class UsuarioService {
@@ -25,6 +27,22 @@ export class UsuarioService {
     public _subirArchivoService: SubirArchivoService
   ) {
     this.cargarStorage();
+  }
+
+  renuevaToken()  {
+    let url = URL_SERVICIOS + '/login/renuevatoken';
+    url += '?token=' + this.token;
+
+    return this.http.get(url).map((resp:any) => {
+      this.token = resp.token;
+      localStorage.setItem("token", resp.token);
+
+    }).catch( err => {
+      this.router.navigate(['/login']);
+      Swal.fire('Error al renovar el token', 'El token no pudo ser renovado', 'error');
+      return throwError(err);
+    });
+
   }
 
   estaLogueado() {
@@ -94,14 +112,14 @@ export class UsuarioService {
               this.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu);            
               return true;
             } else{
-              swal('Error en el login', resp.mensaje, 'error');  
+              Swal.fire('Error en el login', resp.mensaje, 'error');  
             }
           })
           .catch( err => {
-            console.log(err.status );
-            console.log(err.error.mensaje );
+            // console.log(err.status );
+            // console.log(err.error.mensaje );
 
-            swal('Error en el login', err.error.mensaje, 'error');
+            Swal.fire('Error en el login', err.error.mensaje, 'error');
             return throwError(err);
           });
   }
@@ -111,10 +129,10 @@ export class UsuarioService {
 
     return this.http.post(url, usuario)
       .map((resp: any) => {
-      swal("Usuario creado", usuario.email, "success");
+        Swal.fire("Usuario creado", usuario.email, "success");
       return resp.usuario;
     }).catch( err => {
-      swal(err.error.mensaje, err.error.errors.message, 'error');      
+      Swal.fire(err.error.mensaje, err.error.errors.message, 'error');      
       return throwError(err);
     });
   }
@@ -132,11 +150,11 @@ export class UsuarioService {
           this.guardarStorage(usuarioDB._id, this.token, usuarioDB, this.menu);
         }
 
-        swal("Usuario actualizado", usuario.nombre, "success");
+        Swal.fire("Usuario actualizado", usuario.nombre, "success");
 
         return true;
     }).catch( err => {
-      swal(err.error.mensaje, err.error.errors.message, 'error');      
+      Swal.fire(err.error.mensaje, err.error.errors.message, 'error');      
       return throwError(err);
     });
   }
@@ -146,7 +164,7 @@ export class UsuarioService {
       .subirArchivo(archivo, "usuarios", id)
       .then((resp: any) => {
         this.usuario.img = resp.usuario.img;
-        swal("Imagen Actualizada", this.usuario.nombre, "success");
+        Swal.fire("Imagen Actualizada", this.usuario.nombre, "success");
         this.guardarStorage(id, this.token, this.usuario, this.menu);
       })
       .catch(resp => {
@@ -171,7 +189,7 @@ export class UsuarioService {
     let url = URL_SERVICIOS + "/usuario/" + id;
     url += "?token=" + this.token;
     return this.http.delete(url).map(resp => {
-      swal("El usuario ha sido eliminado", "El usuario ha sido eliminado correctamente", "success");
+      Swal.fire("El usuario ha sido eliminado", "El usuario ha sido eliminado correctamente", "success");
       return true;      
     });
   }

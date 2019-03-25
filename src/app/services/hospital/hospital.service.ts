@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { Hospital } from "./../../models/hospital.model";
 import { Injectable } from "@angular/core";
 import { SubirArchivoService } from "../subir-archivo/subir-archivo.service";
-import * as swal from "sweetalert";
+import Swal from 'sweetalert2'
 
 // import * from 'sweetalert';
 // declare var swal:any;
@@ -53,7 +53,7 @@ export class HospitalService {
     let url = URL_SERVICIOS + "/hospital?token=" + this.token ;
 
     return this.http.post(url, { nombre }).map((resp: any) => {
-      swal("Hospital creado", resp.hospital.nombre, "success");
+      Swal.fire("Hospital creado", resp.hospital.nombre, "success");
       return resp.hospital;
     });
   }
@@ -63,7 +63,7 @@ export class HospitalService {
     url += "?token=" + this.token;
 
     return this.http.put(url, hospital).map((resp: any) => {
-      swal("Hospital actualizado", hospital.nombre, "success");
+      Swal.fire("Hospital actualizado", hospital.nombre, "success");
       return true;
     });
   }
@@ -72,7 +72,7 @@ export class HospitalService {
     let url = URL_SERVICIOS + "/hospital/" + id;
     url += "?token=" + this.token;
     return this.http.delete(url).map(resp => {
-      swal(
+      Swal.fire(
         "El hospital ha sido eliminado",
         "El hospital ha sido eliminado correctamente",
         "success"

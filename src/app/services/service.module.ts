@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import {
   LoginGuardGuard,
   AdminGuard,
+  VerificatokenGuard,
   SettingsService,
   SidebarService,
   SharedService,
@@ -23,6 +24,7 @@ import {
   providers: [
     LoginGuardGuard,
     AdminGuard,
+    VerificatokenGuard,
     SettingsService,
     SidebarService,
     SharedService,

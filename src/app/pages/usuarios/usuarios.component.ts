@@ -2,10 +2,9 @@ import { ModalUploadService } from './../../components/modal-upload/modal-upload
 import { UsuarioService } from "src/app/services/service.index";
 import { Component, OnInit } from "@angular/core";
 import { Usuario } from "src/app/models/usuario.model";
-import * as swal from 'sweetalert';
-// import * from 'sweetalert';
 
-// declare var swal:any;
+import Swal from 'sweetalert2'
+
 @Component({
   selector: "app-usuarios",
   templateUrl: "./usuarios.component.html",
@@ -84,17 +83,19 @@ export class UsuariosComponent implements OnInit {
     
 
     if(usuario._id === this._usuarioService.usuario._id){
-      // swal('Error de eliminacion de usuario', 'No se puede borrar a si mismo', 'error');
-      alert('Error de eliminacion de usuario: No se puede borrar a si mismo');
+      Swal.fire('Error de eliminacion de usuario', 'No se puede borrar a si mismo', 'error');
+      // alert('Error de eliminacion de usuario: No se puede borrar a si mismo');
       return;
     }
 
-    swal({
+    Swal.fire({
       title: '¿Estas seguro de eliminar a este usuario?',
       text: 'Una vez eliminado no es posible recuperar al usuario',
-      icon: 'warning',
-      buttons: true,
-      dangerMode: true,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminarlo'
     })!
     .then((borrar) => {
       // console.log(borrar);
@@ -107,8 +108,8 @@ export class UsuariosComponent implements OnInit {
               });
       } 
       else {
-        // swal("El usuario no fue eliminado", "El usuario no ha sido eliminado");
-        alert("El usuario no fue eliminado");
+        Swal.fire("El usuario no fue eliminado", "El usuario no ha sido eliminado");
+        // alert("El usuario no fue eliminado");
       }
     });
   }

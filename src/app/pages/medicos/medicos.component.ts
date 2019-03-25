@@ -3,7 +3,7 @@ import { ModalUploadService } from "./../../components/modal-upload/modal-upload
 import { MedicoService } from "src/app/services/service.index";
 import { Component, OnInit } from "@angular/core";
 import { Medico } from "src/app/models/medico.model";
-import * as swal from "sweetalert";
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-medicos',
@@ -80,12 +80,14 @@ export class MedicosComponent implements OnInit {
 
   borrarMedico(id: string) {
     // console.log(id);
-    swal({
+    Swal.fire({
       title: "¿Estas seguro de eliminar a este medico?",
       text: "Una vez eliminado no es posible recuperar al medico",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminarlo'
     })!.then(borrar => {
       // console.log(borrar);
       if (borrar) {
@@ -94,29 +96,36 @@ export class MedicosComponent implements OnInit {
           this.cargarMedicos();
         });
       } else {
-        swal(
-          "El medico no fue eliminado",
-          "El medico no ha sido eliminado"
-        );
+        Swal.fire( "El medico no fue eliminado", "El medico no ha sido eliminado" );
         // alert("El medico no fue eliminado");
       }
     });
   }
 
   crearMedico(nombre: string) {
-    swal( "Nombre del medico:", { 
-      content: 'input' })!
-      .then(value => {
-      // swal(`You typed: ${value}`);
+    Swal.fire({
+      title: 'Alta de nuevo medico',
+      text: 'Por favor escriba el nombre del medico:',
+      input: 'text',
+      // inputValue: inputValue,
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) {
+          return 'Por favor escriba el nombre del hospital'
+        }
+      }
+    }).then(value => {
       let medico = new Medico();
-      medico.nombre = value;
+      medico.nombre = value.value;
       medico.hospital = "";
       medico.usuario =  this._usuarioService.usuario._id;
 
-      this._medicoService.crearMedico(medico).subscribe(resp => {
-        console.log(resp);
-        this.cargarMedicos();
-      });
+      this._medicoService.crearMedico(medico)
+                        .subscribe(resp => {
+                          console.log(resp);
+                          this.cargarMedicos();
+                          Swal.fire('Se ha creado al medico:', resp.nombre, 'success' );
+                      });
     });
   }
 
